@@ -1,6 +1,6 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
-const csurf = require('csurf')
+//const csurf = require('csurf')
 const cors = require('cors')
 const app = express();
 
@@ -10,25 +10,25 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
 
 
-app.use(csurf({
-    cookie: {
-        httpOnly: true,
-        maxAge: 60//60 seconds
-    }
-}));
-app.use((req, res, next) => {
-    res.cookie('XSRF-TOKEN', req.csrfToken());
-    next();
-});
-app.use((err, req, res, next) => {
-    if (err.code !== 'EBADCSRFTOKEN') {
-        return next(err);
-    }
-    console.log('we got the error with csrf->EBADCSRFTOKEN');
-    res.status(403).json({
-        message: 'error'
-    });
-});
+// app.use(csurf({
+//     cookie: {
+//         httpOnly: true,
+//         maxAge: 60//60 seconds
+//     }
+// }));
+// app.use((req, res, next) => {
+//     res.cookie('XSRF-TOKEN', req.csrfToken());
+//     next();
+// });
+// app.use((err, req, res, next) => {
+//     if (err.code !== 'EBADCSRFTOKEN') {
+//         return next(err);
+//     }
+//     console.log('we got the error with csrf->EBADCSRFTOKEN');
+//     res.status(403).json({
+//         message: 'error'
+//     });
+// });
 
 
 //demo token for post request

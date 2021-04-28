@@ -20,17 +20,12 @@ function App() {
     var b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
     return b ? b.pop() : "";
   }
-  //get csrf token
-  //const tokenRes = await axios.get('/session')
-  //const token = tokenRes.data.session
 
   const afterLogin = async () => {
     try {
       const res = await axios.post('/post')
       console.log(res.data);
       setM("post-token-" + "-" + res.data.name)
-
-
 
     } catch (e) {
       setM(e.message)
