@@ -14,15 +14,10 @@ function App() {
     setM("logged in now" + res.data.name)
   }
 
-
-
   function getCookie(key) {
     var b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
     return b ? b.pop() : "";
   }
-  //get csrf token
-  //const tokenRes = await axios.get('/session')
-  //const token = tokenRes.data.session
 
   const afterLogin = async () => {
     try {
