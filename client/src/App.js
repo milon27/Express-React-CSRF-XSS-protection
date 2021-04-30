@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 axios.defaults.baseURL = 'http://localhost:2727/'
 axios.defaults.withCredentials = true
@@ -8,8 +8,9 @@ function App() {
 
   const [m, setM] = useState("logged out")
 
+
   const login = async () => {
-    const res = await axios.get('/')
+    const res = await axios.get('/login')
     //automatically set on the non http cookie
     setM("logged in now" + res.data.name)
   }
@@ -21,12 +22,10 @@ function App() {
 
   const afterLogin = async () => {
     try {
+      //using the csrf token,now refresh the _csrf
       const res = await axios.post('/post')
       console.log(res.data);
       setM("post-token-" + "-" + res.data.name)
-
-
-
     } catch (e) {
       setM(e.message)
     }
